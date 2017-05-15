@@ -15,9 +15,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var taskArray : [Taskclass] = []
     
-    var context: NSManagedObjectContext!
-  
     /*
+    var context: NSManagedObjectContext!
     lazy var fetchedResultsController: NSFetchedResultsController = {
     let tasksFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
     let dateSortDescriptor = NSSortDescriptor(key: "task.date", ascending: true)
@@ -89,6 +88,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         deleteAction.backgroundColor = UIColor.init(colorLiteralRed: (127/255), green: (219/255), blue: (193/255), alpha: 1)
         editAction.backgroundColor = UIColor.init(colorLiteralRed: (255/255), green: (163/255), blue: (69/255), alpha: 1)
         return [deleteAction, editAction]
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let task = self.taskArray[indexPath.row]
+        self.performSegue(withIdentifier: "addTaskSegue", sender: task)
     }
     
     func getTasks() {
