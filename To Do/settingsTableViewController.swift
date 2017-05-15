@@ -20,10 +20,12 @@ class settingsTableViewController: UITableViewController {
 
     
     var task : Taskclass? = nil
+    var datePickerHidden = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         datePickerChanged()
+        print(datePickerHidden)
     }
 
     func datePickerChanged () {
@@ -34,19 +36,53 @@ class settingsTableViewController: UITableViewController {
         datePickerChanged()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let section = indexPath.section
+        let row = indexPath.row
+        print(section, row)
+        if indexPath.section == 1 && indexPath.row == 1 {
+            toggleDatepicker()
+            print(datePickerHidden)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if datePickerHidden && indexPath.section == 1 && indexPath.row == 2 {
+            return 0
+        }
+        else if datePickerHidden == false && indexPath.section == 1 && indexPath.row == 2 {
+            return 218
+        }
+        else {
+            return 44
+        }
+    }
+
     
+    func toggleDatepicker() {
+        if datePickerHidden == false {
+            datePickerHidden = true
+        } else {
+            datePickerHidden = false
+        }
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
     
     @IBAction func saveTapped(_ sender: Any) {
         if task != nil {
             task?.name = nameTextField.text
             task?.important = importantSwitch.isOn
+            task?.date = datePicker.date as NSDate
         } else {
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let task = Taskclass(context: context)
             task.name = nameTextField.text!
             task.important = importantSwitch.isOn
+            task.date = datePicker.date as NSDate
         }
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+      
         navigationController!.popViewController(animated: true)
     }
     

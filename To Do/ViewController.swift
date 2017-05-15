@@ -7,12 +7,33 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
     var taskArray : [Taskclass] = []
+    
+    var context: NSManagedObjectContext!
+  
+    /*
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+    let tasksFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Task")
+    let dateSortDescriptor = NSSortDescriptor(key: "task.date", ascending: true)
+    tasksFetchRequest.sortDescriptor = [dateSortDescriptor]
+        
+        let frc = NSFetchedResultsController(
+            fetchRequest: tasksFetchRequest,
+            managedObjectContext: self.context,
+            sectionNameKeyPath: "task.date",
+            cacheName: nil)
+        
+        frc.delegate = self
+        
+        return frc
+    }
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +60,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = UITableViewCell()
         let taskindex = taskArray[indexPath.row]
         // definieer een constante: taskindex is de taak die in de taskArray op dat plekje staat van de rij waar je je in bevind
+        let formatter = DateFormatter ()
+        formatter.dateStyle = DateFormatter.Style.long
+        formatter.timeStyle = DateFormatter.Style.none
+        let dateString = formatter.string(from: taskindex.date! as Date)
         if taskindex.important {
-            cell.textLabel?.text = "❗️\(taskindex.name!)"
+            cell.textLabel?.text = "❗️\(taskindex.name!), \(dateString)"
         } else{
-            cell.textLabel?.text = taskindex.name!
+            cell.textLabel?.text = "\(taskindex.name!), \(dateString)"
         }
         // zo bepalen wat hij moet laten zien. als de taak important is moet hij ook uitroep tekens laten zien, anders alleen de tekst
         return cell
@@ -74,7 +99,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } catch {
             print("oeps, we have an error!!")
         }
-
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,5 +108,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             nextVC.task = sender as? Taskclass
         }
     }
-}
 
+}
