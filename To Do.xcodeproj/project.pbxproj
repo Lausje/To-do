@@ -13,6 +13,7 @@
 		D34E9C6C1EC898D00091F964 /* To_Do.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D34E9C6A1EC898D00091F964 /* To_Do.xcdatamodeld */; };
 		D34E9C6E1EC898D00091F964 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D34E9C6D1EC898D00091F964 /* Assets.xcassets */; };
 		D34E9C711EC898D00091F964 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D34E9C6F1EC898D00091F964 /* LaunchScreen.storyboard */; };
+		D34E9C791EC89EBD0091F964 /* settingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34E9C781EC89EBD0091F964 /* settingsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D34E9C6D1EC898D00091F964 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D34E9C701EC898D00091F964 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D34E9C721EC898D00091F964 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D34E9C781EC89EBD0091F964 /* settingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				D34E9C631EC898D00091F964 /* AppDelegate.swift */,
 				D34E9C651EC898D00091F964 /* ViewController.swift */,
 				D34E9C671EC898D00091F964 /* Main.storyboard */,
+				D34E9C781EC89EBD0091F964 /* settingsTableViewController.swift */,
 				D34E9C6D1EC898D00091F964 /* Assets.xcassets */,
 				D34E9C6F1EC898D00091F964 /* LaunchScreen.storyboard */,
 				D34E9C721EC898D00091F964 /* Info.plist */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D34E9C791EC89EBD0091F964 /* settingsTableViewController.swift in Sources */,
 				D34E9C6C1EC898D00091F964 /* To_Do.xcdatamodeld in Sources */,
 				D34E9C661EC898D00091F964 /* ViewController.swift in Sources */,
 				D34E9C641EC898D00091F964 /* AppDelegate.swift in Sources */,
