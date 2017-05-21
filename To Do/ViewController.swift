@@ -12,23 +12,22 @@ import CoreData
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-
+    
     var taskArray : [Taskclass] = []
-
-
+    var now = NSDate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // elke keer als het scherm opnieuw laad, doet de tabel de volgende taken
         getTasks()
         // het haalt alle taak entities op van de core data en stopt het in de array (zie onderaan)
-
+        
         tableView.reloadData()
         // het laad de data opnieuw, zodat je dit ook daadwerkelijk in het scherm ziet (in de array stoppen is niet data herladen..)
     }
@@ -49,13 +48,30 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         formatter.dateStyle = DateFormatter.Style.long
         formatter.timeStyle = DateFormatter.Style.none
         let dateString = formatter.string(from: taskindex.date! as Date)
-        if taskindex.important {
+        if taskindex.important && taskindex.date?.compare(now as Date) == ComparisonResult.orderedAscending{
+            cell.cellTitle?.text = taskindex.name!
+            cell.cellTitle?.textColor = UIColor.red
+            cell.cellSubtitle?.text = dateString
+            cell.cellSubtitle?.textColor = UIColor.red
+            cell.cellImportant?.text = "❗️"
+        }
+        else if taskindex.important == false && taskindex.date?.compare(now as Date) == ComparisonResult.orderedAscending {
+            cell.cellTitle?.text = taskindex.name!
+            cell.cellTitle?.textColor = UIColor.red
+            cell.cellSubtitle?.text = dateString
+            cell.cellSubtitle?.textColor = UIColor.red
+            cell.cellImportant?.text = ""
+        }
+        else if taskindex.important && taskindex.date?.compare(now as Date) == ComparisonResult.orderedDescending{
             cell.cellTitle?.text = taskindex.name!
             cell.cellSubtitle?.text = dateString
             cell.cellImportant?.text = "❗️"
-        } else{
+        }
+        else {
             cell.cellTitle?.text = taskindex.name!
+            cell.cellTitle?.textColor = UIColor.black
             cell.cellSubtitle?.text = dateString
+            cell.cellSubtitle?.textColor = UIColor.black
             cell.cellImportant?.text = ""
         }
         // zo bepalen wat hij moet laten zien. als de taak important is moet hij ook uitroep tekens laten zien, anders alleen de tekst
@@ -107,5 +123,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             nextVC.task = sender as? Taskclass
         }
     }
-
+    
 }
