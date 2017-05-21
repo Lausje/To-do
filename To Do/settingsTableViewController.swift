@@ -28,13 +28,15 @@ class settingsTableViewController: UITableViewController {
         print(datePickerHidden)
         print(task as Any)
         nameTextField.text = task?.name
-        importantSwitch.isOn = (task?.important)!
-        let formatter = DateFormatter ()
-        formatter.dateStyle = DateFormatter.Style.long
-        formatter.timeStyle = DateFormatter.Style.none
-        let dateString = formatter.string(from: task?.date as! Date)
-        dateDetailLabel.text = dateString
-        datePicker.date = (task?.date)! as Date
+        if task != nil {
+            importantSwitch.isOn = false
+            let formatter = DateFormatter ()
+            formatter.dateStyle = DateFormatter.Style.long
+            formatter.timeStyle = DateFormatter.Style.none
+            let dateString = formatter.string(from: task?.date as! Date)
+            dateDetailLabel.text = dateString
+            datePicker.date = (task?.date)! as Date
+    }
     }
 
     func datePickerChanged () {
